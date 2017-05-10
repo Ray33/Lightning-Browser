@@ -251,16 +251,23 @@ public class TabsFragment extends Fragment implements View.OnClickListener, View
     public void tabAdded() {
         if (mTabsAdapter != null) {
             mTabsAdapter.notifyItemInserted(getTabsManager().last());
-            mRecyclerView.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        mRecyclerView.smoothScrollToPosition(mTabsAdapter.getItemCount() - 1);
-                    }catch (IllegalArgumentException e){
-                        mRecyclerView.smoothScrollToPosition(0);
+            if (mRecyclerView!=null){
+                mRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if (mRecyclerView!=null){
+                                mRecyclerView.smoothScrollToPosition(mTabsAdapter.getItemCount() - 1);
+                            }
+                        }catch (IllegalArgumentException e){
+                            if (mRecyclerView!=null){
+                                mRecyclerView.smoothScrollToPosition(0);
+                            }
+                        }
                     }
-                }
-            }, 500);
+                }, 500);
+            }
+
         }
     }
 

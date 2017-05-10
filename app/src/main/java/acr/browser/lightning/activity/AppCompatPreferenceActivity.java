@@ -1,5 +1,6 @@
 package acr.browser.lightning.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -34,7 +35,11 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
         try{
             super.onCreate(savedInstanceState);
         }catch (IllegalArgumentException e){
-            super.onCreate(null);
+            try{
+                super.onCreate(null);
+            }catch (IllegalArgumentException e1){
+                this.startActivity(new Intent(this,BrowserActivity.class));
+            }
         }
     }
 

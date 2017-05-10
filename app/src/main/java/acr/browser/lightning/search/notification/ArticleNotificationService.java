@@ -72,7 +72,7 @@ public class ArticleNotificationService extends Service {
                         checkArticle();
                     }
                 } catch (Exception e) {
-                    Log.e(TAG,e.getMessage());
+                    Log.e(TAG,(e.getMessage()==null)?"can't fetch document" : e.getMessage());
                 }catch (ExceptionInInitializerError e){
                     Log.w(TAG,"can't loading notfication image");
                 }
@@ -164,6 +164,9 @@ public class ArticleNotificationService extends Service {
         notifIntent.setData(Uri.parse(article.getUrl()));
         notifIntent.putExtra("from","daily_news_notification");
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notifIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        if (pendingIntent==null){
+            return;
+        }
         nb.setContentIntent(pendingIntent);
         nb.setAutoCancel(true);
 
@@ -176,6 +179,8 @@ public class ArticleNotificationService extends Service {
             NotificationCompat.BigPictureStyle s = new NotificationCompat.BigPictureStyle().bigPicture(bitmap);
             s.setSummaryText(article.getText());
             nb.setStyle(s);
+        }else{
+            return;
         }
 
 

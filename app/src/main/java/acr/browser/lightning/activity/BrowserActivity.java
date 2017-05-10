@@ -1106,7 +1106,11 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
             view.setTranslationY(0);
         }
 
-        view.requestFocus();
+        try{
+            view.requestFocus();
+        }catch (NullPointerException e){
+            Log.w(TAG,"can't request focus");
+        }
 
         mCurrentView = view;
 
@@ -1401,7 +1405,11 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
             overridePendingTransition(R.anim.fade_in_scale, R.anim.slide_down_out);
         }
 
-        mEventBus.unregister(mBusEventListener);
+        try{
+            mEventBus.unregister(mBusEventListener);
+        }catch (IllegalArgumentException e){
+            Log.i(TAG,"event is not registered");
+        }
     }
 
     void saveOpenTabs() {

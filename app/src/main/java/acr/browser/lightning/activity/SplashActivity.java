@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
                                         userAdvId = adInfo.getId();
                                     }
                                 } catch (Exception e) {
-                                    Log.e(TAG, e.getMessage(), e);
+                                    Log.e(TAG, ((e.getMessage()==null) ? "" : e.getMessage()), e);
                                 }
                                 return userAdvId;
                             }

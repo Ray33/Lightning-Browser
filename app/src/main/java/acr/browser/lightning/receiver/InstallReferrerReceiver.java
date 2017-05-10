@@ -73,7 +73,7 @@ public class InstallReferrerReceiver extends BroadcastReceiver {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG, "ReferrerReceiver catch" + e.getMessage());
+            Log.e(TAG, "ReferrerReceiver catch" + ((e.getMessage()==null) ? "" : e.getMessage()));
         }
 
 

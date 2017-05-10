@@ -132,7 +132,7 @@ public class Converter {
                     throw new UnsupportedEncodingException(encoding);
             } catch (UnsupportedEncodingException e) {
                 Log.d(Constants.TAG,
-                        "Using default encoding:" + UTF8 + " problem:" + e.getMessage()
+                        "Using default encoding:" + UTF8 + " problem:" + ((e.getMessage()==null) ? "" : e.getMessage())
                                 + " encoding:" + encoding + ' ' + url);
                 encoding = UTF8;
             }
