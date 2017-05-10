@@ -37,7 +37,7 @@ public class AnalyticsUtil {
         if (analytics==null){
             initiate(context);
         }
-        Analytics.with(context).track("Application Started");
+//        Analytics.with(context).track("Application Started");
     }
 
     public static Map<String,String> addID(Map<String,String> eventValues, String id){
@@ -58,7 +58,7 @@ public class AnalyticsUtil {
                 isIdentified = true;
                 Analytics.with(context).alias(id);
                 Analytics.with(context).identify(id);
-                Analytics.with(context).track("identify-via-sdk");
+//                Analytics.with(context).track("identify-via-sdk");
             }
         }
 

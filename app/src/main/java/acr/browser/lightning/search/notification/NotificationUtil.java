@@ -27,6 +27,7 @@ public final class NotificationUtil {
 
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra(INTENT_ACTION_SEARCH, INTENT_ACTION_SEARCH);
+            intent.putExtra("from", "search_notification");
             intent.setAction(INTENT_ACTION_SEARCH);
             PendingIntent activity = PendingIntent.getActivity(context, REQUEST_CODE_SEARCH_NOTIFICATION, intent, 0);
             Notification build = priority
@@ -39,6 +40,7 @@ public final class NotificationUtil {
                 setPendingIntent(context, remoteViews);
                 intent = new Intent(context, MainActivity.class);
                 intent.putExtra(INTENT_ACTION_SEARCH, INTENT_ACTION_SEARCH);
+                intent.putExtra("from", "search_notification");
                 intent.setAction(INTENT_ACTION_SEARCH);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, REQUEST_CODE_SEARCH_NOTIFICATION, intent, 0);
                 remoteViews.setOnClickPendingIntent(R.id.notify_container, pendingIntent);
@@ -63,7 +65,6 @@ public final class NotificationUtil {
 
     private static void setPendingIntent(Context context, RemoteViews remoteViews) {
         Intent intent = new Intent(context, SearchNotifySettingActivity.class);
-        intent.putExtra("from", "search_notification");
         remoteViews.setOnClickPendingIntent(R.id.notify_setting, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
     }
 

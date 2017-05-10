@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,8 +146,15 @@ public class BookmarksFragment extends Fragment implements View.OnClickListener,
                 setBookmarkDataSet(mBookmarkManager.getBookmarksFromFolder(item.getTitle(), true), true);
             } else {
                 mUiController.bookmarkItemClicked(item);
-
-                Analytics.with(getContext()).track("bookmark_click");
+                if (item!=null){
+                    if (!TextUtils.isEmpty(item.getTitle())){
+                        if ("Facebook".equalsIgnoreCase(item.getTitle())){
+                            Analytics.with(getContext()).track("bookmark_facebook_click");
+                        }else if ("Travel".equalsIgnoreCase(item.getTitle())){
+                            Analytics.with(getContext()).track("bookmark_travel_click");
+                        }
+                    }
+                }
 
             }
         }

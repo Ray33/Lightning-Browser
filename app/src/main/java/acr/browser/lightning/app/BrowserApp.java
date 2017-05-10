@@ -182,9 +182,9 @@ public class BrowserApp extends Application {
 
 // Set the initialized instance as a globally accessible instance.
             Analytics.setSingletonInstance(analytics);
-
+            String userId = "";
             if (mPreferenceManager!=null){
-                String userId = mPreferenceManager.getUserId();
+                userId = mPreferenceManager.getUserId();
                 if (userId!=null && !TextUtils.isEmpty(userId)){
                     analytics.alias(userId);
                     analytics.identify(userId);
@@ -215,7 +215,7 @@ public class BrowserApp extends Application {
                     try {
                         Date cDate = new Date();
                         String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-                        String url = "http://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate;
+                        String url = "http://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId;
                         HttpResponse response = NetworkUtil.getContentFromURL(url, new StringParser(String.class), BrowserApp.this);
                         mPreferenceManager.setInstalled(response.responseCode<400);
                     } catch (UnsupportedEncodingException e) {
