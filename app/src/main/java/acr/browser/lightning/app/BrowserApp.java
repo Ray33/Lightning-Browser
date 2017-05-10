@@ -204,8 +204,13 @@ public class BrowserApp extends Application {
 //                }
 //            });
 
+            String userCountry="";
+            if (mPreferenceManager!=null && TextUtils.isEmpty(mPreferenceManager.getCountry())){
+                userCountry = getUserCountry(BrowserApp.this);
+                mPreferenceManager.setCountry(userCountry);
+            }
 
-                if (mPreferenceManager!=null && !mPreferenceManager.isInstalled()) {
+            if (mPreferenceManager!=null && !mPreferenceManager.isInstalled()) {
                     String referrer = mPreferenceManager.getReferrer();
                     String appId = BuildConfig.APPLICATION_ID;
                     if(TextUtils.isEmpty(referrer)){
@@ -215,7 +220,7 @@ public class BrowserApp extends Application {
                     try {
                         Date cDate = new Date();
                         String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-                        String url = "http://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId;
+                        String url = "http://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId + "&c=" + userCountry;
                         HttpResponse response = NetworkUtil.getContentFromURL(url, new StringParser(String.class), BrowserApp.this);
                         mPreferenceManager.setInstalled(response.responseCode<400);
                     } catch (UnsupportedEncodingException e) {
@@ -223,10 +228,6 @@ public class BrowserApp extends Application {
                     }
                 }
 
-                if (mPreferenceManager!=null && TextUtils.isEmpty(mPreferenceManager.getCountry())){
-                    String userCountry = getUserCountry(BrowserApp.this);
-                    mPreferenceManager.setCountry(userCountry);
-                }
 
             //Track daily usage
 //            Map<String, String> eventData = AnalyticsService.initResponse(IEventCallback.EVENT_TYPE.SYSTEM);
