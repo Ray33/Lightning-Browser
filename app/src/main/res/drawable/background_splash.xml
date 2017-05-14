@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_mobitech_logo"
+            android:src="@drawable/mobitech_splash_screen"
             />
     </item>
 </layer-list>

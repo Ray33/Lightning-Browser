@@ -155,7 +155,7 @@ public class ArticleNotificationService extends Service {
     private void showNotification(Article article, Bitmap bitmap) {
         Log.d(TAG, "showNotification: " + bitmap);
         NotificationCompat.Builder nb = new NotificationCompat.Builder(this);
-        nb.setSmallIcon(R.drawable.ic_mobitech_logo);
+        nb.setSmallIcon(R.drawable.ic_action_reading);
         nb.setContentTitle(article.getTitle());
         nb.setContentText(article.getText());
         nb.setTicker(article.getTitle());
