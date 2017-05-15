@@ -107,7 +107,7 @@ public class BrowserApp extends Application {
 //            WebView.setWebContentsDebuggingEnabled(true);
 //        }
 
-        registerActivityLifecycleCallbacks(new MemoryLeakUtils.LifecycleAdapter() {
+       registerActivityLifecycleCallbacks(new MemoryLeakUtils.LifecycleAdapter() {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 Log.d(TAG, "Cleaning up after the Android framework");
@@ -171,24 +171,24 @@ public class BrowserApp extends Application {
             ACRA.setConfig(conf);
             ACRA.getErrorReporter().setReportSender(new HockeySender("2955c756b2a44bdf9eafc02a848930d9", " 9f03c103e83eab675f0c6ff239e36d79",BrowserApp.this));
 
-
-            Analytics analytics = new Analytics.Builder(BrowserApp.this, BrowserApp.this.getString(R.string.analytics_write_key))
-                    // Enable this to record certain application events automatically!
-                    .trackApplicationLifecycleEvents()
-                    // Enable this to record screen views automatically!
-                    .recordScreenViews()
-                    .use(MixpanelIntegration.FACTORY)
-                    .build();
+            try{
+                Analytics analytics = new Analytics.Builder(BrowserApp.this, BrowserApp.this.getString(R.string.analytics_write_key))
+                        // Enable this to record certain application events automatically!
+                        .trackApplicationLifecycleEvents()
+                        // Enable this to record screen views automatically!
+                        .recordScreenViews()
+                        .use(MixpanelIntegration.FACTORY)
+                        .build();
+                Analytics.setSingletonInstance(analytics);
+            }catch (Exception e){
+                Log.e(TAG,e.getMessage()!=null ? e.getMessage() : "can't initiate mixpanel", e);
+            }
 
 // Set the initialized instance as a globally accessible instance.
-            Analytics.setSingletonInstance(analytics);
+
             String userId = "";
             if (mPreferenceManager!=null){
                 userId = mPreferenceManager.getUserId();
-                if (userId!=null && !TextUtils.isEmpty(userId)){
-                    analytics.alias(userId);
-                    analytics.identify(userId);
-                }
             }
 
 
@@ -220,12 +220,17 @@ public class BrowserApp extends Application {
                     try {
                         Date cDate = new Date();
                         String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-                        String url = "http://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId + "&c=" + userCountry;
+                        String url = "https://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId + "&c=" + userCountry;
                         HttpResponse response = NetworkUtil.getContentFromURL(url, new StringParser(String.class), BrowserApp.this);
                         mPreferenceManager.setInstalled(response.responseCode<400);
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
+
+                if (userId!=null && !TextUtils.isEmpty(userId)){
+                    Analytics.with(BrowserApp.this).alias(userId);
+                    Analytics.with(BrowserApp.this).identify(userId);
+                }
                 }
 
 

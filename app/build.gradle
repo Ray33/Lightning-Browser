@@ -17,7 +17,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionName "4.5.4"
-        versionCode 125
+        versionCode 128
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
@@ -125,6 +125,6 @@ dependencies {
     //User's Goggle Advertiser ID
     compile 'com.google.android.gms:play-services-ads:9.4.0'
 
-    compile 'com.segment.analytics.android:analytics:4.+'
-    compile 'com.segment.analytics.android.integrations:mixpanel:+'
+    compile 'com.segment.analytics.android:analytics:4.2.6'
+    compile 'com.segment.analytics.android.integrations:mixpanel:1.0.7'
 }

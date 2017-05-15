@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -107,15 +108,17 @@ public class BookmarkManager {
                     String line;
                     while ((line = bookmarksReader.readLine()) != null) {
                         try {
-                            JSONObject object = new JSONObject(line);
-                            HistoryItem item = new HistoryItem();
-                            item.setTitle(object.getString(TITLE));
-                            final String url = object.getString(URL);
-                            item.setUrl(url);
-                            item.setFolder(object.getString(FOLDER));
-                            item.setOrder(object.getInt(ORDER));
-                            item.setImageId(R.drawable.ic_bookmark);
-                            bookmarks.put(url, item);
+                            if (!TextUtils.isEmpty(line)) {
+                                JSONObject object = new JSONObject(line);
+                                HistoryItem item = new HistoryItem();
+                                item.setTitle(object.getString(TITLE));
+                                final String url = object.getString(URL);
+                                item.setUrl(url);
+                                item.setFolder(object.getString(FOLDER));
+                                item.setOrder(object.getInt(ORDER));
+                                item.setImageId(R.drawable.ic_bookmark);
+                                bookmarks.put(url, item);
+                            }
                         } catch (JSONException e) {
                             Log.e(TAG, "Can't parse line " + line, e);
                         }

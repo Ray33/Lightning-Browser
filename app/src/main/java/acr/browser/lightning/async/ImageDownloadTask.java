@@ -73,13 +73,16 @@ public class ImageDownloadTask extends AsyncTask<Void, Void, Bitmap> {
                 final URL urlDownload = new URL(urlDisplay);
                 final HttpURLConnection connection = (HttpURLConnection) urlDownload.openConnection();
                 connection.setDoInput(true);
-                connection.setConnectTimeout(1000);
-                connection.setReadTimeout(1000);
+                connection.setConnectTimeout(3000);
+                connection.setReadTimeout(3000);
                 connection.connect();
                 in = connection.getInputStream();
 
                 if (in != null) {
                     mIcon = BitmapFactory.decodeStream(in);
+                }
+                if (connection!=null){
+                    connection.disconnect();
                 }
                 // ...and cache it
                 if (mIcon != null) {
@@ -92,6 +95,7 @@ public class ImageDownloadTask extends AsyncTask<Void, Void, Bitmap> {
             } catch (Exception ignored) {
                 Log.d(TAG, "Could not download: " + urlDisplay);
             } finally {
+
 
                 Utils.close(in);
                 Utils.close(fos);
@@ -108,13 +112,16 @@ public class ImageDownloadTask extends AsyncTask<Void, Void, Bitmap> {
                 final URL urlDownload = new URL("https://www.google.com/s2/favicons?domain_url=" + uri.toString());
                 final HttpURLConnection connection = (HttpURLConnection) urlDownload.openConnection();
                 connection.setDoInput(true);
-                connection.setConnectTimeout(1000);
-                connection.setReadTimeout(1000);
+                connection.setConnectTimeout(3000);
+                connection.setReadTimeout(3000);
                 connection.connect();
                 in = connection.getInputStream();
 
                 if (in != null) {
                     mIcon = BitmapFactory.decodeStream(in);
+                }
+                if (connection!=null){
+                    connection.disconnect();
                 }
                 // ...and cache it
                 if (mIcon != null) {
