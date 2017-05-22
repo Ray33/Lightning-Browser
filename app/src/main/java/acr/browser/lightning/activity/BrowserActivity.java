@@ -45,7 +45,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -94,6 +93,7 @@ import com.squareup.otto.Subscribe;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -121,7 +121,6 @@ import acr.browser.lightning.preference.PreferenceManager;
 import acr.browser.lightning.receiver.ArticleAlarmReceiver;
 import acr.browser.lightning.receiver.NetworkReceiver;
 import acr.browser.lightning.search.SuggestionsAdapter;
-import acr.browser.lightning.search.notification.BdBookmarkNotifyActivity;
 import acr.browser.lightning.search.notification.NotificationUtil;
 import acr.browser.lightning.utils.DrawableUtils;
 import acr.browser.lightning.utils.KeyboardHelper;
@@ -278,19 +277,27 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
 
     private void addHomePageToBookmark() {
         if (!mPreferenceManager.getIsStartSetOnBookmark()){
+            List<HistoryItem> currentBookmarks = mBookmarkManager.getAllBookmarks(true);
+
             HistoryItem historyItem = new HistoryItem();
             historyItem.setTitle("Search");
             historyItem.setUrl(this.mSearchUrl + "%20");
             historyItem.setImageId(R.drawable.ic_search);
             historyItem.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_search));
-            mBookmarkManager.addBookmark(historyItem);
+            historyItem.setOrder(currentBookmarks.size() + 1);
+            currentBookmarks.add(currentBookmarks.size(), historyItem);
+
 
             historyItem = new HistoryItem();
             historyItem.setTitle("Home and News");
             historyItem.setUrl(UrlUtils.makeMobitechStartPage(mPreferences.getUserId(), MOBITECH_APP_KEY, mPreferences.needUseUserId(),mPreferences));
             historyItem.setImageId( R.drawable.ic_action_home);
             historyItem.setBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_home));
-            mBookmarkManager.addBookmark(historyItem);
+            historyItem.setOrder(currentBookmarks.size() + 1);
+            currentBookmarks.add(currentBookmarks.size(), historyItem);
+
+            mBookmarkManager.deleteAllBookmarks();
+            mBookmarkManager.addBookmarkList(currentBookmarks);
 
             mPreferenceManager.setIsStartSetOnBookmark(true);
 
@@ -2231,38 +2238,20 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
      */
     @Override
     public void peekDrawer() {
-        //show bookmark hint
-        if(mPreferences.isFirstStart()) {
-            openBookmarks();
-            mDrawerHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    closeBookmarksDrawer();
-                    Intent intent = new Intent(BrowserActivity.this, BdBookmarkNotifyActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title","" + getText(R.string.bookmark_callout_dialog_text));
-                    intent.putExtras(bundle);
-
-                    BrowserActivity.this.startActivity(intent);
-                    mPreferences.setFirstStart(false);
-                }
-            }, (long) (2 * DateUtils.SECOND_IN_MILLIS)); //   change to however many seconds you wish to display the hint for
-        }
-
-        //show tabs hint
-        if (!mPreferences.isTabsHintShown() && mTabsManager.last()>1){
-            openTabsDrawer();
-            mDrawerHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    closeTabsDrawer();
-                    Intent intent = new Intent(BrowserActivity.this, BdBookmarkNotifyActivity.class);
-                    intent.putExtra("title","" + getText(R.string.tabs_callout_dialog_text));
-                    BrowserActivity.this.startActivity(intent);
-                    mPreferences.setIsTabsHintShown(true);
-                }
-            }, (long) (2 * DateUtils.SECOND_IN_MILLIS));
-        }
+//        //show tabs hint
+//        if (!mPreferences.isTabsHintShown() && mTabsManager.last()>1){
+//            openTabsDrawer();
+//            mDrawerHandler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    closeTabsDrawer();
+//                    Intent intent = new Intent(BrowserActivity.this, BdBookmarkNotifyActivity.class);
+//                    intent.putExtra("title","" + getText(R.string.tabs_callout_dialog_text));
+//                    BrowserActivity.this.startActivity(intent);
+//                    mPreferences.setIsTabsHintShown(true);
+//                }
+//            }, (long) (2 * DateUtils.SECOND_IN_MILLIS));
+//        }
     }
 
 
