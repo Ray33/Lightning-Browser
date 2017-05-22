@@ -157,6 +157,14 @@ public class BookmarkManager {
                 //noinspection IOResourceOpenedButNotSafelyClosed
                 bookmarkWriter = new BufferedWriter(new FileWriter(tempFile, false));
                 JSONObject object = new JSONObject();
+                if (mBookmarks!=null && !mBookmarks.isEmpty()){
+                    Collections.sort(mBookmarks, new Comparator<HistoryItem>() {
+                        @Override
+                        public int compare(HistoryItem o1, HistoryItem o2) {
+                            return o1.getOrder() - o2.getOrder();
+                        }
+                    });
+                }
                 for (HistoryItem item : mBookmarks) {
                     object.put(TITLE, item.getTitle());
                     object.put(URL, item.getUrl());
@@ -401,7 +409,12 @@ public class BookmarkManager {
                 bookmarks.add(item);
         }
         if (sort) {
-            Collections.sort(bookmarks, new SortIgnoreCase());
+            Collections.sort(bookmarks, new Comparator<HistoryItem>() {
+                @Override
+                public int compare(HistoryItem o1, HistoryItem o2) {
+                    return o1.getOrder() - o2.getOrder();
+                }
+            });
         }
         return bookmarks;
     }
