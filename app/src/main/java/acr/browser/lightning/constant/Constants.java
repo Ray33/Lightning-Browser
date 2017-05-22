@@ -24,7 +24,7 @@ public final class Constants {
 
     // Search query URLs
     public static final String YAHOO_SEARCH = "https://search.yahoo.com/search?p=";
-    public static final String GOOGLE_SEARCH = "https://www.google.com/search?client=lightning&ie=UTF-8&oe=UTF-8&q=";
+    public static final String GOOGLE_SEARCH = "https://cse.google.com:443/cse/publicurl?cx=partner-pub-6728551582410897:7354642160&q=";
     public static final String BING_SEARCH = "https://www.bing.com/search?q=";
     public static final String DUCK_SEARCH = "https://duckduckgo.com/?t=lightning&q=";
     public static final String DUCK_LITE_SEARCH = "https://duckduckgo.com/lite/?t=lightning&q=";
