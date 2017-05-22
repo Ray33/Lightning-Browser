@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.segment.analytics.Analytics;
+
 import javax.inject.Inject;
 
 import acr.browser.lightning.R;
@@ -42,6 +44,7 @@ public class SearchNotifySettingActivity extends Activity implements View.OnClic
                 finish();
                 break;
             case R.id.dialog_cancel:
+                Analytics.with(SearchNotifySettingActivity.this).track("search_notification_turned_off");
                 mPreferenceManager.setSearchNotificationEnabled(false);
                 NotificationUtil.cancelNotification(this, REQUEST_CODE_SEARCH_NOTIFICATION);
                 startService(new Intent(this, CommonPersistentService.class));
