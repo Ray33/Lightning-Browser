@@ -219,10 +219,11 @@ public class BrowserApp extends Application {
 
                     try {
                         Date cDate = new Date();
-                        String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+                        String fDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(cDate);
                         String url = "https://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId + "&c=" + userCountry;
                         HttpResponse response = NetworkUtil.getContentFromURL(url, new StringParser(String.class), BrowserApp.this);
                         mPreferenceManager.setInstalled(response.responseCode<400);
+
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
@@ -241,16 +242,17 @@ public class BrowserApp extends Application {
 //            AnalyticsService.raiseEvent(eventData, BrowserApp.this);
 //
 
-            /**
-             * Get ISO 3166-1 alpha-2 country code for this device (or null if not available)
-             * @param context Context reference to get the TelephonyManager instance from
-             * @return country code or null
-             */
 
 
             return null;
+
         }
 
+        /**
+         * Get ISO 3166-1 alpha-2 country code for this device (or null if not available)
+         * @param context Context reference to get the TelephonyManager instance from
+         * @return country code or null
+         */
         public String getUserCountry(Context context) {
             try {
                 final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
