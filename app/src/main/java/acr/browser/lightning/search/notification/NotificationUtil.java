@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build.VERSION;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.widget.RemoteViews;
@@ -21,7 +23,11 @@ public final class NotificationUtil {
 
     private static Notification getNotification(Context context) {
         try {
-            Builder priority = new Builder(context).setSmallIcon(R.drawable.ic_search_notification_small_icon).setAutoCancel(false).setOngoing(true).setPriority(2);
+
+            Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.ic_search_notification_small_icon);
+
+            Builder priority = new Builder(context).setLargeIcon(icon).setSmallIcon(R.drawable.ic_search_notification_small_icon).setAutoCancel(false).setOngoing(true).setPriority(2);
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification_search);
             NotificationUtil.setPendingIntent(context, remoteViews);
 
