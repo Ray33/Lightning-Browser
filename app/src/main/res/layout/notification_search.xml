@@ -10,8 +10,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="30.0dip"
-        android:layout_centerVertical="true"
+        android:layout_height="45.0dip"
         android:layout_marginLeft="14.0dip"
         android:layout_marginRight="14.0dip"
         android:layout_marginTop="13.0dip"
