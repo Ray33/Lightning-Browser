@@ -101,7 +101,6 @@ public class BrowserPresenter {
     public void resumeAll(BrowserActivity activity) {
         mTabsModel.resumeAll(activity);
         if (VisibilityManager.showNewTab) {
-            VisibilityManager.resetShowNewTab();
             if(mTabsModel.checkIfShowNewTab()) {
                 newTab(null, true);
             }
@@ -348,6 +347,8 @@ public class BrowserPresenter {
             mView.showSnackbar(R.string.max_tabs);
             return false;
         }
+
+        VisibilityManager.resetShowNewTab();
 
         Log.d(TAG, "New tab, show: " + show);
 

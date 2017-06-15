@@ -4,8 +4,8 @@
         <shape>
             <solid android:color="#FFF" />
             <stroke
-                android:width="0.5dip"
-                android:color="#ffd0d0d0" />
+                android:width="1dip"
+                android:color="#000" />
         </shape>
     </item>
 </layer-list>
