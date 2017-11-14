@@ -33,8 +33,10 @@ public class ArticleAlarmReceiver extends BroadcastReceiver {
         PendingIntent recurringIntent = PendingIntent.getBroadcast(context, 0, downloader,
                 PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(),
-                AlarmManager.INTERVAL_DAY, recurringIntent);
+        if (alarms != null) {
+            alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP, updateTime.getTimeInMillis(),
+                    AlarmManager.INTERVAL_DAY, recurringIntent);
+        }
     }
 
     @Override
@@ -47,7 +49,7 @@ public class ArticleAlarmReceiver extends BroadcastReceiver {
         if (intent == null) {
             return;
         }
-        if (TextUtils.equals(intent.getAction(), "android.intent.action.BOOT_COMPLETED") ||
+        if (TextUtils.equals(intent.getAction(), Intent.ACTION_BOOT_COMPLETED) ||
                 TextUtils.equals(intent.getAction(), "com.android.vending.INSTALL_REFERRER")) {
             setRecurringArticleAlarm(context);
             return;
