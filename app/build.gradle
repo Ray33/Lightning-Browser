@@ -16,14 +16,19 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionName "4.5.4"
-        versionCode 130
+        versionName "4.5.5"
+        versionCode 131
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
             all*.exclude group: 'org.apache.httpcomponents', module: 'httpcore'
         }
         buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
+        buildConfigField "String", "SEARCH_BASE_URL", '"https://trends.mobitech-search.xyz/v1/search/%1$s?user_id=%2$s&origin=APP_SEARCH_BAR&c=%3$s&keywords="'
+        buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+        resValue "string", "ppLink", "http://mobitech.io/pp.html"
+        resValue "string", "action_contact_us", "info@mobitech.io"
+        resValue "string", "search_provider_name", "Mobitech Search"
     }
     sourceSets {
         lightningPlus.setRoot('src/LightningPlus')
@@ -46,6 +51,22 @@ android {
         }
     }
     productFlavors {
+
+        bayblon {
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
+//            applicationId "acr.browser.lightning"
+            applicationId "io.mobitech.browser"
+            versionName android.defaultConfig.versionName + ".bayblon"
+            resValue "string", "ppLink", "http://default-browser.com/about/index.html"
+            resValue "string", "action_contact_us", "info@default-browser.com"
+            resValue "string", "search_provider_name", "Default Browser"
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://www.default-browser.com/?affID=970801840&q=\""
+            buildConfigField "String", "START_PAGE", '"http://www.default-browser.com/?affID=970801840"'
+
+
+        }
+
         mobitech {
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""

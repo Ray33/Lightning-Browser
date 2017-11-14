@@ -210,30 +210,30 @@ public class BrowserApp extends Application {
                 mPreferenceManager.setCountry(userCountry);
             }
 
+
             if (mPreferenceManager!=null && !mPreferenceManager.isInstalled()) {
-                    String referrer = mPreferenceManager.getReferrer();
-                    String appId = BuildConfig.APPLICATION_ID;
-                    if(TextUtils.isEmpty(referrer)){
-                        referrer = BuildConfig.VERSION_NAME;
-                    }
+                String referrer = mPreferenceManager.getReferrer();
+                String appId = BuildConfig.APPLICATION_ID;
+                if(TextUtils.isEmpty(referrer)){
+                    referrer = BuildConfig.VERSION_NAME;
+                }
 
-                    try {
-                        Date cDate = new Date();
-                        String fDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(cDate);
-                        String url = "https://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId + "&c=" + userCountry;
-                        HttpResponse response = NetworkUtil.getContentFromURL(url, new StringParser(String.class), BrowserApp.this);
-                        mPreferenceManager.setInstalled(response.responseCode<400);
+                try {
+                    Date cDate = new Date();
+                    String fDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(cDate);
+                    String url = "https://dashboard.mobitech.io/v1/tracking/install?p_key=" + MOBITECH_APP_KEY+"&referrer_id=" + URLEncoder.encode(referrer,"UTF-8") + "&app_id=" + URLEncoder.encode(appId,"UTF-8") +"&date="+fDate + "&user_id=" + userId + "&c=" + userCountry;
+                    HttpResponse response = NetworkUtil.getContentFromURL(url, new StringParser(String.class), BrowserApp.this);
+                    mPreferenceManager.setInstalled(response.responseCode<400);
 
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
 
                 if (userId!=null && !TextUtils.isEmpty(userId)){
                     Analytics.with(BrowserApp.this).alias(userId);
                     Analytics.with(BrowserApp.this).identify(userId);
                 }
-                }
-
+            }
 
             //Track daily usage
 //            Map<String, String> eventData = AnalyticsService.initResponse(IEventCallback.EVENT_TYPE.SYSTEM);

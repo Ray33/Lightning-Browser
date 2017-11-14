@@ -254,7 +254,7 @@ public class UrlUtils {
             }
         }
 
-        return Constants.TRECKING_MOBITECH_INSTALLED_APP + referrer;
+        return Constants.TRACKING_MOBITECH_INSTALLED_APP + referrer;
     }
 
     public static void putHttpParameters(Map<String, String> params, HttpURLConnection connection) {

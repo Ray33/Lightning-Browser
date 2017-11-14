@@ -33,13 +33,13 @@ public final class Constants {
     public static final String ASK_SEARCH = "http://www.ask.com/web?qsrc=0&o=0&l=dir&qo=LightningBrowser&q=";
     public static final String BAIDU_SEARCH = "https://www.baidu.com/s?wd=";
     public static final String YANDEX_SEARCH = "https://yandex.ru/yandsearch?lr=21411&text=";
-    public static final String MOBITECH_SEARCH = "https://trends.mobitech-search.xyz/v1/search/%1$s?user_id=%2$s&origin=APP_SEARCH_BAR&c=%3$s&keywords=";
-    public static final String MOBITECH_SEARCH_WITHOUT_USER_ID = "https://trends.mobitech-search.xyz/v1/search/%1$s?origin=APP_SEARCH_BAR&c=%2$s&keywords=";
-    public static final String MOBITECH_STARTPAGE = "https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q=";
-    public static final String MOBITECH_STARTPAGE_WITHOUT_USER_ID = "https://browser.mobitech-search.xyz/start?p_key=%1$s&c=%2$s&q=";
-    public static final String MOBITECH_STARTPAGE_BASE_URL = "https://browser.mobitech-search.xyz/start";
+    public static final String MOBITECH_SEARCH = BuildConfig.SEARCH_BASE_URL;
+    public static final String MOBITECH_SEARCH_WITHOUT_USER_ID = BuildConfig.SEARCH_BASE_URL;//"https://trends.mobitech-search.xyz/v1/search/%1$s?origin=APP_SEARCH_BAR&c=%2$s&keywords=";
+    public static final String MOBITECH_STARTPAGE = BuildConfig.START_PAGE; //"http://www.default-browser.com/?affID=970801840";//https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q=";
+    public static final String MOBITECH_STARTPAGE_WITHOUT_USER_ID = BuildConfig.START_PAGE;//"http://www.default-browser.com/?affID=970801840";//"https://browser.mobitech-search.xyz/start?p_key=%1$s&c=%2$s&q=";
+    public static final String MOBITECH_STARTPAGE_BASE_URL = BuildConfig.START_PAGE;//"https://browser.mobitech-search.xyz/start";
 
-    public static final String TRECKING_MOBITECH_INSTALLED_APP = "http://installs.mobitech.io/v1/tracking/install"; //POST
+    public static final String TRACKING_MOBITECH_INSTALLED_APP = "http://installs.mobitech.io/v1/tracking/install"; //POST
 
 
     // Custom local page schemes

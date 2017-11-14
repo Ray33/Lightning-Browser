@@ -43,7 +43,7 @@ public class TrackFirstInstalledAppTask extends AsyncTask<String, Boolean, Boole
         httpParameters.put(HTTP_PARAM_REFERRER_ID, referrerId);
         httpParameters.put(HTTP_PARAM_PUBLIC_KEY, publicKey);
         try {
-            final URL urlDownload = new URL(Constants.TRECKING_MOBITECH_INSTALLED_APP);
+            final URL urlDownload = new URL(Constants.TRACKING_MOBITECH_INSTALLED_APP);
             final HttpURLConnection connection = (HttpURLConnection) urlDownload.openConnection();
             connection.setRequestMethod(HttpPost.METHOD_NAME);
             UrlUtils.putHttpParameters(httpParameters, connection);
