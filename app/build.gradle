@@ -23,6 +23,7 @@ android {
         configurations {
             all*.exclude group: 'org.apache.httpcomponents', module: 'httpcore'
         }
+        buildConfigField "String", "NOTIFICATION_BASE_URL", "\"\""
         buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
         buildConfigField "String", "SEARCH_BASE_URL", '"https://trends.mobitech-search.xyz/v1/search/%1$s?user_id=%2$s&origin=APP_SEARCH_BAR&c=%3$s&keywords="'
         buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
@@ -52,7 +53,20 @@ android {
     }
     productFlavors {
 
-        bayblon {
+        bayblon_google_custom_search {
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
+//            applicationId "acr.browser.lightning"
+            applicationId "io.mobitech.browser"
+            versionName android.defaultConfig.versionName + ".cse"
+            resValue "string", "search_provider_name", "Google Custom Search"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search62.com/?a=\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://search62.com/?a=\""
+            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start_cse?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+        }
+
+
+            bayblon_yahoo {
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
 //            applicationId "acr.browser.lightning"

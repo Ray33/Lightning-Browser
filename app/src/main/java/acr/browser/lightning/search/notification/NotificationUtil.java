@@ -11,6 +11,7 @@ import android.os.Build.VERSION;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.widget.RemoteViews;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.R;
 import acr.browser.lightning.activity.MainActivity;
 
@@ -34,6 +35,7 @@ public final class NotificationUtil {
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra(INTENT_ACTION_SEARCH, INTENT_ACTION_SEARCH);
             intent.putExtra("from", "search_notification");
+            intent.putExtra("url", BuildConfig.NOTIFICATION_BASE_URL);
             intent.setAction(INTENT_ACTION_SEARCH);
             PendingIntent activity = PendingIntent.getActivity(context, REQUEST_CODE_SEARCH_NOTIFICATION, intent, 0);
             Notification build = priority

@@ -1260,6 +1260,7 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
                 Analytics.with(BrowserActivity.this).track(actionName + "_click");
             }
         }
+
     }
 
     @Override

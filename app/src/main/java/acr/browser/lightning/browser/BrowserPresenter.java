@@ -236,15 +236,15 @@ public class BrowserPresenter {
         mTabsModel.doAfterInitialization(new Runnable() {
             @Override
             public void run() {
-                final String url;
+                String url = null;
                 if (intent != null) {
+                    url = intent.getStringExtra("url");
                     if(INTENT_ACTION_SEARCH.equals(intent.getStringExtra(INTENT_ACTION_SEARCH))) {
                         mView.showSearch();  //  from search notification
-                    }
-                    url = intent.getDataString();
 
-                    if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
-                        mView.showSearch(intent.getStringExtra(SearchManager.QUERY));
+                        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                            mView.showSearch(intent.getStringExtra(SearchManager.QUERY));
+                        }
                     }
                 } else {
                     url = null;
@@ -258,10 +258,11 @@ public class BrowserPresenter {
                     loadUrlInCurrentView(url);
                 } else if (url != null) {
                     if (url.startsWith(Constants.FILE)) {
+                        final String finalUrl = url;
                         mView.showBlockedLocalFileDialog(new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                newTab(url, true);
+                                newTab(finalUrl, true);
                                 mShouldClose = true;
                                 LightningView tab = mTabsModel.lastTab();
                                 if (tab != null) {
