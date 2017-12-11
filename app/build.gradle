@@ -27,6 +27,7 @@ android {
         buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
         buildConfigField "String", "SEARCH_BASE_URL", '"https://trends.mobitech-search.xyz/v1/search/%1$s?user_id=%2$s&origin=APP_SEARCH_BAR&c=%3$s&keywords="'
         buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+        resValue "string", "app_name", "Internet"
         resValue "string", "ppLink", "http://mobitech.io/pp.html"
         resValue "string", "action_contact_us", "info@mobitech.io"
         resValue "string", "search_provider_name", "Mobitech Search"
@@ -61,7 +62,7 @@ android {
             versionName android.defaultConfig.versionName + ".cse"
             resValue "string", "search_provider_name", "Google Custom Search"
             buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search62.com/?a=\""
-            buildConfigField "String", "SEARCH_BASE_URL", "\"http://search62.com/?a=\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://google.com/?a=\""
             buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start_cse?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
         }
 
@@ -70,6 +71,7 @@ android {
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
 //            applicationId "acr.browser.lightning"
+            resValue "string", "app_name", "Default Browser"
             applicationId "io.mobitech.browser"
             versionName android.defaultConfig.versionName + ".bayblon"
             resValue "string", "ppLink", "http://default-browser.com/about/index.html"
