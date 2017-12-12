@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.R;
 import acr.browser.lightning.activity.MainActivity;
 import acr.browser.lightning.app.BrowserApp;
@@ -82,6 +83,9 @@ public class ArticleNotificationService extends Service {
     }
 
     private void checkArticle() throws IOException {
+        if (!BuildConfig.IS_NOTIFICATION_ENABLED){
+            return;
+        }
         mUriBuilder.appendQueryParameter("user_id", mPreferenceManager.getUserId());
         String url = mUriBuilder.build().toString();
         if (url.contains(BASE_ARTICLE_URL)){//This check due to a bug where the url failed to initialize successfully.
@@ -153,6 +157,9 @@ public class ArticleNotificationService extends Service {
     }
 
     private void showNotification(Article article, Bitmap bitmap) {
+        if (!BuildConfig.IS_NOTIFICATION_ENABLED){
+            return;
+        }
         Log.d(TAG, "showNotification: " + bitmap);
         NotificationCompat.Builder nb = new NotificationCompat.Builder(this);
         nb.setSmallIcon(R.drawable.ic_action_reading);

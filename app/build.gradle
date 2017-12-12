@@ -23,6 +23,8 @@ android {
         configurations {
             all*.exclude group: 'org.apache.httpcomponents', module: 'httpcore'
         }
+        buildConfigField "Boolean", "IS_NOTIFICATION_ENABLED", "true"
+        buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
         buildConfigField "String", "NOTIFICATION_BASE_URL", "\"\""
         buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
         buildConfigField "String", "SEARCH_BASE_URL", '"https://trends.mobitech-search.xyz/v1/search/%1$s?user_id=%2$s&origin=APP_SEARCH_BAR&c=%3$s&keywords="'
@@ -55,6 +57,7 @@ android {
     productFlavors {
 
         bayblon_google_custom_search {
+            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "false"
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
 //            applicationId "acr.browser.lightning"
@@ -67,7 +70,8 @@ android {
         }
 
 
-            bayblon_yahoo {
+        bayblon_yahoo {
+            buildConfigField "Boolean", "IS_NOTIFICATION_ENABLED", "false"
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
 //            applicationId "acr.browser.lightning"
@@ -78,9 +82,7 @@ android {
             resValue "string", "action_contact_us", "info@default-browser.com"
             resValue "string", "search_provider_name", "Default Browser"
             buildConfigField "String", "SEARCH_BASE_URL", "\"http://www.default-browser.com/?affID=970801840&q=\""
-            buildConfigField "String", "START_PAGE", '"http://www.default-browser.com/?affID=970801840"'
-
-
+                buildConfigField "String", "START_PAGE", '"http://www.default-browser.com/?affID=970801840"'
         }
 
         mobitech {

@@ -28,7 +28,7 @@ public final class NotificationUtil {
             Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.ic_search_notification_small_icon);
 
-            Builder priority = new Builder(context).setLargeIcon(icon).setSmallIcon(R.drawable.ic_search_notification_small_icon).setAutoCancel(false).setOngoing(true).setPriority(2);
+            Builder priority = new Builder(context).setLargeIcon(icon).setSmallIcon(R.drawable.ic_search_notification_small_icon).setAutoCancel(false).setOngoing(BuildConfig.IS_PERSISTENT_NOTIFICATION).setPriority(2);
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification_search);
             NotificationUtil.setPendingIntent(context, remoteViews);
 
