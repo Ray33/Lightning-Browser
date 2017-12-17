@@ -273,6 +273,8 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
 
         initialize(savedInstanceState);
 
+        showSearchNotification();
+
     }
 
     private void addHomePageToBookmark() {
@@ -506,7 +508,7 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
 
     @Override
     public void showSearch(String searchText){
-        mSearch.requestFocusFromTouch();
+        //mSearch.requestFocusFromTouch();
         mSearch.setText(searchText == null ? "" : searchText);
         KeyboardHelper.showKeyboard(this);
     }
