@@ -19,10 +19,12 @@ import static acr.browser.lightning.constant.Constants.INTENT_ACTION_SEARCH;
 
 /* renamed from: com.baidu.browser.inter.a.c */
 public final class NotificationUtil {
+
+
     public static final int REQUEST_CODE_SEARCH_NOTIFICATION = 9999;
     public static final int REQUEST_CODE_ARTICLE_NOTIFICATION = 8888;
 
-    private static Notification getNotification(Context context) {
+    private static Notification getNotification(Context context, String userId) {
         try {
 
             Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
@@ -35,7 +37,7 @@ public final class NotificationUtil {
             Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra(INTENT_ACTION_SEARCH, INTENT_ACTION_SEARCH);
             intent.putExtra("from", "search_notification");
-            intent.putExtra("url", BuildConfig.NOTIFICATION_BASE_URL);
+            intent.putExtra("url", addUserId(BuildConfig.NOTIFICATION_BASE_URL, userId));
             intent.setAction(INTENT_ACTION_SEARCH);
             PendingIntent activity = PendingIntent.getActivity(context, REQUEST_CODE_SEARCH_NOTIFICATION, intent, 0);
             Notification build = priority
@@ -61,11 +63,20 @@ public final class NotificationUtil {
         }
     }
 
-    public static void showSearchNotification(Context context) {
+    private static String addUserId(String notificationBaseUrl, String userId) {
+        if (notificationBaseUrl.contains("?")){
+            notificationBaseUrl = notificationBaseUrl.replace("?", "?user_id=" + userId+"&");
+        }else{
+            notificationBaseUrl += "?user_id=" + userId;
+        }
+        return notificationBaseUrl;
+    }
+
+    public static void showSearchNotification(Context context, String userId) {
         try {
             context.startService(new Intent(context, CommonPersistentService.class));
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(REQUEST_CODE_SEARCH_NOTIFICATION, getNotification(context));
+            notificationManager.notify(REQUEST_CODE_SEARCH_NOTIFICATION, getNotification(context, userId));
         } catch (Throwable th) {
             th.printStackTrace();
         }

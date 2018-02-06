@@ -38,6 +38,7 @@ android {
         lightningPlus.setRoot('src/LightningPlus')
         lightningLite.setRoot('src/LightningLite')
         dt.setRoot('src/dt')
+        linkury_yahoo_free.setRoot('src/linkury')
     }
     buildTypes {
         debug {
@@ -56,6 +57,35 @@ android {
         }
     }
     productFlavors {
+
+
+        gionee_gcs {
+            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"GIONEMOBBRSR10018\""
+//            applicationId "acr.browser.lightning"
+            applicationId "io.mobitech.browser.gionee"
+            versionName android.defaultConfig.versionName + ".gionee"
+            resValue "string", "app_name", "Internet Browser"
+            resValue "string", "search_provider_name", "Google Custom Search"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://trends.mobitech-search.xyz/v1/search/GIONEMOBBRSR10018?\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://mybrowser-search.com\""
+            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+        }
+
+        linkury_yahoo_free {
+            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "false"
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"TEST10TRENDS\""
+//            applicationId "acr.browser.lightning"
+            applicationId "io.mobitech.browser.yahoo"
+            versionName android.defaultConfig.versionName + ".yahoo"
+            resValue "string", "app_name", "Slide Browser"
+            resValue "string", "search_provider_name", "Yahoo"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+        }
 
         bayblon_google_custom_search {
             buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "false"

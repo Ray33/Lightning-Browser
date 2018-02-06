@@ -1274,7 +1274,7 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
 
     @Override
     public void showSearchNotification() {
-        NotificationUtil.showSearchNotification(this);
+        NotificationUtil.showSearchNotification(this, mPreferenceManager.getUserId());
     }
 
     @Override

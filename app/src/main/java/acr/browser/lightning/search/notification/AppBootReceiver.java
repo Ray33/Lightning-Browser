@@ -4,8 +4,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
+
+import javax.inject.Inject;
+
+import acr.browser.lightning.preference.PreferenceManager;
 
 public class AppBootReceiver extends BroadcastReceiver {
+
+
+    @Inject
+    PreferenceManager mPreferenceManager;
 
     public static void startService(Context context) {
         context.startService(new Intent(context, CommonPersistentService.class));
@@ -23,7 +32,8 @@ public class AppBootReceiver extends BroadcastReceiver {
             Intent intent2 = new Intent(context, CommonPersistentService.class);
             intent2.setAction("acr.browser.lightning.search.notification.CommonPersistentService.action.uploadChannelHeartbeat");
             context.startService(intent2);
-            NotificationUtil.showSearchNotification(context);
+            Log.i("TAG", "user id: " +mPreferenceManager.getUserId() );
+            NotificationUtil.showSearchNotification(context, mPreferenceManager.getUserId());
         }
     }
 }
