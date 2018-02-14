@@ -17,7 +17,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionName "4.5.5"
-        versionCode 131
+        versionCode 132
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
@@ -39,6 +39,7 @@ android {
         lightningLite.setRoot('src/LightningLite')
         dt.setRoot('src/dt')
         linkury_yahoo_free.setRoot('src/linkury')
+        babylon_shield_plus.setRoot('src/shieldPlus')
     }
     buildTypes {
         debug {
@@ -59,6 +60,20 @@ android {
     productFlavors {
 
 
+        babylon_shield_plus {
+            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"SHLDPLS10024ER\""
+//            applicationId "acr.browser.lightning"
+            applicationId "com.shieldplus.browser"
+            versionName android.defaultConfig.versionName + ".shieldplus"
+            resValue "string", "app_name", "Shield Plus Browser"
+            resValue "string", "search_provider_name", "Yahoo"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            buildConfigField "String", "START_PAGE", '"http://privacy.shield-plus.com"'
+        }
+
         gionee_gcs {
             buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
             buildConfigField "boolean", "FULL_VERSION", "true"
@@ -69,7 +84,6 @@ android {
             resValue "string", "app_name", "Internet Browser"
             resValue "string", "search_provider_name", "Google Custom Search"
             buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://trends.mobitech-search.xyz/v1/search/GIONEMOBBRSR10018?\""
-            buildConfigField "String", "SEARCH_BASE_URL", "\"http://mybrowser-search.com\""
             buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
         }
 
@@ -105,16 +119,16 @@ android {
         bayblon_yahoo {
             buildConfigField "Boolean", "IS_NOTIFICATION_ENABLED", "false"
             buildConfigField "boolean", "FULL_VERSION", "true"
-            buildConfigField "String", "appKey", "\"TESTYHOC36B5A\""
+            buildConfigField "String", "appKey", "\"DFTBRSR10025ER\""
 //            applicationId "acr.browser.lightning"
             resValue "string", "app_name", "Default Browser"
-            applicationId "io.mobitech.browser.yahoo"
-            versionName android.defaultConfig.versionName + ".bayblon"
+            applicationId "com.defaultbrowser.yahoo"
+            versionName android.defaultConfig.versionName
             resValue "string", "ppLink", "http://default-browser.com/about/index.html"
             resValue "string", "action_contact_us", "info@default-browser.com"
             resValue "string", "search_provider_name", "Default Browser"
             buildConfigField "String", "SEARCH_BASE_URL", "\"http://www.default-browser.com/?affID=970801840&q=\""
-                buildConfigField "String", "START_PAGE", '"http://www.default-browser.com/?affID=970801840"'
+            buildConfigField "String", "START_PAGE", '"http://www.default-browser.com/?affID=970801840"'
         }
 
         mobitech {
