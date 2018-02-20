@@ -17,7 +17,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionName "4.5.5"
-        versionCode 132
+        versionCode 133
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
@@ -67,38 +67,12 @@ android {
 //            applicationId "acr.browser.lightning"
             applicationId "com.shieldplus.browser"
             versionName android.defaultConfig.versionName + ".shieldplus"
-            resValue "string", "app_name", "Shield Plus Browser"
+            resValue "string", "app_name", "Shield Plus - Privacy Browser"
             resValue "string", "search_provider_name", "Yahoo"
             buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search.yahoo.com/?q=\""
             buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
             buildConfigField "String", "START_PAGE", '"http://privacy.shield-plus.com"'
-        }
-
-        gionee_gcs {
-            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
-            buildConfigField "boolean", "FULL_VERSION", "true"
-            buildConfigField "String", "appKey", "\"GIONEMOBBRSR10018\""
-//            applicationId "acr.browser.lightning"
-            applicationId "io.mobitech.browser.gionee"
-            versionName android.defaultConfig.versionName + ".gionee"
-            resValue "string", "app_name", "Internet Browser"
-            resValue "string", "search_provider_name", "Google Custom Search"
-            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://trends.mobitech-search.xyz/v1/search/GIONEMOBBRSR10018?\""
-            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
-        }
-
-        linkury_yahoo_free {
-            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "false"
-            buildConfigField "boolean", "FULL_VERSION", "true"
-            buildConfigField "String", "appKey", "\"TEST10TRENDS\""
-//            applicationId "acr.browser.lightning"
-            applicationId "io.mobitech.browser.yahoo"
-            versionName android.defaultConfig.versionName + ".yahoo"
-            resValue "string", "app_name", "Slide Browser"
-            resValue "string", "search_provider_name", "Yahoo"
-            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search.yahoo.com/?q=\""
-            buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
-            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+            resValue "string", "ppLink", "http://shield-plus.com/about/privacy.html"
         }
 
         bayblon_google_custom_search {
@@ -129,6 +103,33 @@ android {
             resValue "string", "search_provider_name", "Default Browser"
             buildConfigField "String", "SEARCH_BASE_URL", "\"http://www.default-browser.com/?affID=970801840&q=\""
             buildConfigField "String", "START_PAGE", '"http://www.default-browser.com/?affID=970801840"'
+        }
+
+        gionee_gcs {
+            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"GIONEMOBBRSR10018\""
+//            applicationId "acr.browser.lightning"
+            applicationId "io.mobitech.browser.gionee"
+            versionName android.defaultConfig.versionName + ".gionee"
+            resValue "string", "app_name", "Internet Browser"
+            resValue "string", "search_provider_name", "Google Custom Search"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://trends.mobitech-search.xyz/v1/search/GIONEMOBBRSR10018?\""
+            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+        }
+
+        linkury_yahoo_free {
+            buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "false"
+            buildConfigField "boolean", "FULL_VERSION", "true"
+            buildConfigField "String", "appKey", "\"TEST10TRENDS\""
+//            applicationId "acr.browser.lightning"
+            applicationId "io.mobitech.browser.yahoo"
+            versionName android.defaultConfig.versionName + ".yahoo"
+            resValue "string", "app_name", "Slide Browser"
+            resValue "string", "search_provider_name", "Yahoo"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
         }
 
         mobitech {
