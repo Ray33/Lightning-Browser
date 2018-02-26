@@ -262,7 +262,6 @@
     <string name="dialog_title_close_browser">Close browser</string>
 
     <!--search notification-->
-    <string name="search_notification_title">News and Search</string>
     <string name="search_notification_dialog_title">One-tap search</string>
     <string name="disable">Disable</string>
     <string name="keep">Keep it</string>

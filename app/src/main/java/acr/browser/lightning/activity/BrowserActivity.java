@@ -97,6 +97,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.R;
 import acr.browser.lightning.app.BrowserApp;
 import acr.browser.lightning.browser.BookmarksView;
@@ -274,6 +275,12 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
         initialize(savedInstanceState);
 
         showSearchNotification();
+
+        if (BuildConfig.IS_INCOGNITO_MODE_DEFAULT){
+            Intent intent = new Intent(BrowserActivity.this, IncognitoActivity.class);
+//            intent.setData(Uri.parse(event.url));
+            startActivity(intent);
+        }
 
     }
 

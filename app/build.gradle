@@ -16,13 +16,14 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionName "4.5.5"
-        versionCode 133
+        versionName "4.5.6"
+        versionCode 136
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
             all*.exclude group: 'org.apache.httpcomponents', module: 'httpcore'
         }
+        buildConfigField "Boolean", "IS_INCOGNITO_MODE_DEFAULT", "false"
         buildConfigField "Boolean", "IS_NOTIFICATION_ENABLED", "true"
         buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
         buildConfigField "String", "NOTIFICATION_BASE_URL", "\"\""
@@ -33,6 +34,7 @@ android {
         resValue "string", "ppLink", "http://mobitech.io/pp.html"
         resValue "string", "action_contact_us", "info@mobitech.io"
         resValue "string", "search_provider_name", "Mobitech Search"
+        resValue "string", "search_notification_title", "News and Search"
     }
     sourceSets {
         lightningPlus.setRoot('src/LightningPlus')
@@ -69,7 +71,9 @@ android {
             versionName android.defaultConfig.versionName + ".shieldplus"
             resValue "string", "app_name", "Shield Plus - Privacy Browser"
             resValue "string", "search_provider_name", "Yahoo"
-            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://search.yahoo.com/?q=\""
+            resValue "string", "search_notification_title", "Search in Private"
+            buildConfigField "Boolean", "IS_INCOGNITO_MODE_DEFAULT", "true"
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://privacy.shield-plus.com\""
             buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
             buildConfigField "String", "START_PAGE", '"http://privacy.shield-plus.com"'
             resValue "string", "ppLink", "http://shield-plus.com/about/privacy.html"
@@ -96,7 +100,7 @@ android {
             buildConfigField "String", "appKey", "\"DFTBRSR10025ER\""
 //            applicationId "acr.browser.lightning"
             resValue "string", "app_name", "Default Browser"
-            applicationId "com.defaultbrowser.yahoo"
+            applicationId "com.default.browser"
             versionName android.defaultConfig.versionName
             resValue "string", "ppLink", "http://default-browser.com/about/index.html"
             resValue "string", "action_contact_us", "info@default-browser.com"
