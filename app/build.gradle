@@ -17,7 +17,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionName "4.5.6"
-        versionCode 136
+        versionCode 137
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
@@ -32,9 +32,11 @@ android {
         buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
         resValue "string", "app_name", "Internet"
         resValue "string", "ppLink", "http://mobitech.io/pp.html"
+        resValue "string", "eula_link", "http://mobitech.io/eula.html"
         resValue "string", "action_contact_us", "info@mobitech.io"
         resValue "string", "search_provider_name", "Mobitech Search"
         resValue "string", "search_notification_title", "News and Search"
+        resValue "string", "about_link", "http://mobitech.io/"
     }
     sourceSets {
         lightningPlus.setRoot('src/LightningPlus')
@@ -72,11 +74,14 @@ android {
             resValue "string", "app_name", "Shield Plus - Privacy Browser"
             resValue "string", "search_provider_name", "Yahoo"
             resValue "string", "search_notification_title", "Search in Private"
+            resValue "string", "action_contact_us", "info@shield-plus.com"
             buildConfigField "Boolean", "IS_INCOGNITO_MODE_DEFAULT", "true"
             buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://privacy.shield-plus.com\""
             buildConfigField "String", "SEARCH_BASE_URL", "\"http://search.yahoo.com/?q=\""
             buildConfigField "String", "START_PAGE", '"http://privacy.shield-plus.com"'
             resValue "string", "ppLink", "http://shield-plus.com/about/privacy.html"
+            resValue "string", "eula_link", "http://shield-plus.com/about/eula.html"
+            resValue "string", "about_link", "http://shield-plus.com/"
         }
 
         bayblon_google_custom_search {

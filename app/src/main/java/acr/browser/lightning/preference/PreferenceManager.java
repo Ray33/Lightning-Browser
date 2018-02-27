@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.constant.Constants;
 import acr.browser.lightning.download.DownloadHandler;
 
@@ -152,19 +153,19 @@ public class PreferenceManager {
     }
 
     public boolean getClearCacheExit() {
-        return mPrefs.getBoolean(Name.CLEAR_CACHE_EXIT, true);
+        return mPrefs.getBoolean(Name.CLEAR_CACHE_EXIT, BuildConfig.IS_INCOGNITO_MODE_DEFAULT);
     }
 
     public boolean getClearCookiesExitEnabled() {
-        return mPrefs.getBoolean(Name.CLEAR_COOKIES_EXIT, false);
+        return mPrefs.getBoolean(Name.CLEAR_COOKIES_EXIT, BuildConfig.IS_INCOGNITO_MODE_DEFAULT);
     }
 
     public boolean getClearWebStorageExitEnabled() {
-        return mPrefs.getBoolean(Name.CLEAR_WEBSTORAGE_EXIT, false);
+        return mPrefs.getBoolean(Name.CLEAR_WEBSTORAGE_EXIT, BuildConfig.IS_INCOGNITO_MODE_DEFAULT);
     }
 
     public boolean getClearHistoryExitEnabled() {
-        return mPrefs.getBoolean(Name.CLEAR_HISTORY_EXIT, false);
+        return mPrefs.getBoolean(Name.CLEAR_HISTORY_EXIT, BuildConfig.IS_INCOGNITO_MODE_DEFAULT);
     }
 
     public boolean getColorModeEnabled() {
