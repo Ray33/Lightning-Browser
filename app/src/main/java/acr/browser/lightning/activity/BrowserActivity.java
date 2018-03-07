@@ -136,6 +136,7 @@ import acr.browser.lightning.view.SearchView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static acr.browser.lightning.BuildConfig.IS_INCOGNITO_MODE_DEFAULT;
 import static acr.browser.lightning.constant.Constants.INTENT_ACTION_SEARCH;
 import static acr.browser.lightning.constant.Constants.INTENT_ACTION_WEB_SEARCH;
 import static acr.browser.lightning.constant.Constants.MOBITECH_APP_KEY;
@@ -534,7 +535,7 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
 
     void panicClean() {
         Log.d(TAG, "Closing browser");
-        mTabsManager.newTab(this, "", false);
+        mTabsManager.newTab(this, "", IS_INCOGNITO_MODE_DEFAULT);
         mTabsManager.switchToTab(0);
         mTabsManager.clearSavedState();
         HistoryPage.deleteHistoryPage(getApplication());
@@ -1257,10 +1258,17 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
                 }
             }, 500);
         }
-        if (intent!=null){
-            String actionName = intent.getStringExtra("from");
-            if (!TextUtils.isEmpty(actionName)){
-                Analytics.with(BrowserActivity.this).track(actionName + "_click");
+        if (intent!=null) {
+            if (intent != null && Intent.ACTION_VIEW.equals(intent.getAction()) && !TextUtils.isEmpty(intent.getDataString())) {
+                if (intent.getDataString().startsWith("http")) {
+                    final LightningView currentView = mTabsManager.getCurrentTab();
+                    currentView.loadUrl(intent.getDataString());
+                } else {
+                    String actionName = intent.getStringExtra("from");
+                    if (!TextUtils.isEmpty(actionName)) {
+                        Analytics.with(BrowserActivity.this).track(actionName + "_click");
+                    }
+                }
             }
         }
 

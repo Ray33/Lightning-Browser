@@ -14,6 +14,7 @@ import com.anthonycr.bonsai.Action;
 import com.anthonycr.bonsai.Observable;
 import com.anthonycr.bonsai.Subscriber;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.R;
 
 @SuppressWarnings("deprecation")
@@ -72,7 +73,7 @@ public class MainActivity extends BrowserActivity {
 
     @Override
     public boolean isIncognito() {
-        return false;
+        return BuildConfig.IS_INCOGNITO_MODE_DEFAULT;
     }
 
     @Override
