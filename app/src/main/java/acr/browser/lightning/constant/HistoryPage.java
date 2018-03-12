@@ -105,6 +105,10 @@ public class HistoryPage extends AsyncTask<Void, Void, Void> {
         return Constants.FILE + historyWebPage;
     }
 
+    public void eraseHistory(){
+        mHistoryDatabase.deleteHistory();
+    }
+
     public void load() {
         executeOnExecutor(BrowserApp.getIOThread());
     }

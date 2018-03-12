@@ -41,6 +41,9 @@ public class MainActivity extends BrowserActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: " + (getIntent() == null));
+        if (BuildConfig.IS_INCOGNITO_MODE_DEFAULT){
+            cleanHistory();
+        }
     }
 
     @Override
@@ -73,7 +76,7 @@ public class MainActivity extends BrowserActivity {
 
     @Override
     public boolean isIncognito() {
-        return BuildConfig.IS_INCOGNITO_MODE_DEFAULT;
+        return false;//BuildConfig.IS_INCOGNITO_MODE_DEFAULT;
     }
 
     @Override

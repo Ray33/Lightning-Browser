@@ -97,6 +97,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.R;
 import acr.browser.lightning.app.BrowserApp;
 import acr.browser.lightning.browser.BookmarksView;
@@ -265,6 +266,7 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: ");
+
         BrowserApp.getAppComponent().inject(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -272,10 +274,15 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
         mTabsManager = new TabsManager();
         mPresenter = new BrowserPresenter(this, isIncognito());
 
+
         initialize(savedInstanceState);
 
         showSearchNotification();
 
+        if (BuildConfig.IS_INCOGNITO_MODE_DEFAULT){
+            Log.d(TAG, "onCreate closing clean : ");
+            cleanHistory();
+        }
 
     }
 
@@ -544,6 +551,28 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
         // the panic intent since finish() isn't completely
         // closing the browser
         System.exit(1);
+    }
+
+    void cleanHistory() {
+        if (BuildConfig.IS_INCOGNITO_MODE_DEFAULT){
+            if (mTabsManager!=null){
+                Log.d(TAG,"closing last:" + mTabsManager.last());
+                for (int i=0; i <=mTabsManager.last();i++){
+                    Log.d(TAG,"closing index:" + i);
+                    new HistoryPage(mTabsManager.getTabAtPosition(i), getApplication(), mHistoryDatabase).eraseHistory();
+                    mTabsManager.deleteTab(i);
+                }
+            }
+        }
+        Log.d(TAG, "Closing browser");
+        mTabsManager.newTab(this, "", IS_INCOGNITO_MODE_DEFAULT);
+        mTabsManager.switchToTab(0);
+        mTabsManager.clearSavedState();
+        new HistoryPage(mTabsManager.getCurrentTab(), getApplication(), mHistoryDatabase).eraseHistory();
+        HistoryPage.deleteHistoryPage(getApplication());
+        // System exit needed in the case of receiving
+        // the panic intent since finish() isn't completely
+        // closing the browser
     }
 
     private class SearchListenerClass implements OnKeyListener, OnEditorActionListener,
@@ -1455,6 +1484,16 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
         if (mHistoryDatabase != null) {
             mHistoryDatabase.close();
             mHistoryDatabase = null;
+        }
+        if (BuildConfig.IS_INCOGNITO_MODE_DEFAULT){
+            if (mTabsManager!=null){
+                Log.d(TAG,"closing last:" + mTabsManager.last());
+                for (int i=0; i <=mTabsManager.last();i++){
+                    Log.d(TAG,"closing index:" + i);
+                    mTabsManager.deleteTab(i);
+                }
+            }
+            cleanHistory();
         }
 
         super.onDestroy();
