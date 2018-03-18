@@ -16,8 +16,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionName "4.6.0"
-        versionCode 143
+        versionName "4.6.2"
+        versionCode 145
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         configurations {
@@ -66,6 +66,7 @@ android {
 
         babylon_shield_plus {
             buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "true"
+            buildConfigField "Boolean", "IS_NOTIFICATION_ENABLED", "false"
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"SHLDPLS10024ER\""
 //            applicationId "acr.browser.lightning"
@@ -150,16 +151,18 @@ android {
         }
 
         dt {
+
             buildConfigField "Boolean", "IS_PERSISTENT_NOTIFICATION", "false"
             buildConfigField "boolean", "FULL_VERSION", "true"
             buildConfigField "String", "appKey", "\"DTFP21573D\""
 //            applicationId "acr.browser.lightning"
             applicationId "io.mobitech.browser.dt"
             versionName android.defaultConfig.versionName + ".dt"
+            resValue "string", "app_name", "Internet"
             resValue "string", "search_provider_name", "Google Custom Search"
-            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"https://trends.mobitech-search.xyz/v1/search/DTFP21573D\""
-            buildConfigField "String", "SEARCH_BASE_URL", "\"https://search.yahoo.com/search?p=\""
-            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?p_key=%1$s&user_id=%2$s&c=%3$s&q="'
+            buildConfigField "String", "NOTIFICATION_BASE_URL", "\"http://www.flip-search.com/?affID=6162352780&q=mybrowser-search\""
+            buildConfigField "String", "SEARCH_BASE_URL", "\"http://google.com/?q=\""
+            buildConfigField "String", "START_PAGE", '"https://browser.mobitech-search.xyz/start?google_redirection=true&hide_trends=true&p_key=%1$s&user_id=%2$s&c=%3$s&q="'
         }
 
 //        lightningLite {
