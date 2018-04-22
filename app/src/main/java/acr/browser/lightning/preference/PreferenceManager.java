@@ -157,7 +157,7 @@ public class PreferenceManager {
     }
 
     public boolean getClearCookiesExitEnabled() {
-        return mPrefs.getBoolean(Name.CLEAR_COOKIES_EXIT, BuildConfig.IS_INCOGNITO_MODE_DEFAULT);
+        return mPrefs.getBoolean(Name.CLEAR_COOKIES_EXIT, false);
     }
 
     public boolean getClearWebStorageExitEnabled() {

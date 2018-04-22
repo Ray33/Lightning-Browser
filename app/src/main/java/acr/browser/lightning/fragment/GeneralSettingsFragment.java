@@ -16,12 +16,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.R;
 import acr.browser.lightning.constant.Constants;
 import acr.browser.lightning.dialog.BrowserDialog;
@@ -30,7 +32,7 @@ import acr.browser.lightning.utils.ProxyUtils;
 import acr.browser.lightning.utils.ThemeUtils;
 import acr.browser.lightning.utils.Utils;
 
-import static acr.browser.lightning.preference.PreferenceManager.*;
+import static acr.browser.lightning.preference.PreferenceManager.Suggestion;
 
 public class GeneralSettingsFragment extends LightningPreferenceFragment implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
@@ -470,16 +472,19 @@ public class GeneralSettingsFragment extends LightningPreferenceFragment impleme
                     mPreferenceManager.setUserAgentChoice(which + 1);
                     switch (which + 1) {
                         case 1:
-                            useragent.setSummary(getResources().getString(R.string.agent_default));
+                            useragent.setSummary(getResources().getString(R.string.agent_default)
+                                    + TextUtils.htmlEncode(BuildConfig.USER_AGENT_SUFFIX));
                             break;
                         case 2:
                             useragent.setSummary(getResources().getString(R.string.agent_desktop));
                             break;
                         case 3:
-                            useragent.setSummary(getResources().getString(R.string.agent_mobile));
+                            useragent.setSummary(getResources().getString(R.string.agent_mobile)
+                                    + TextUtils.htmlEncode(BuildConfig.USER_AGENT_SUFFIX));
                             break;
                         case 4:
-                            useragent.setSummary(getResources().getString(R.string.agent_custom));
+                            useragent.setSummary(getResources().getString(R.string.agent_custom)
+                                    + TextUtils.htmlEncode(BuildConfig.USER_AGENT_SUFFIX));
                             agentPicker();
                             break;
                     }
@@ -500,7 +505,7 @@ public class GeneralSettingsFragment extends LightningPreferenceFragment impleme
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String text = getAgent.getText().toString();
-                    mPreferenceManager.setUserAgentString(text);
+                    mPreferenceManager.setUserAgentString(text + TextUtils.htmlEncode(BuildConfig.USER_AGENT_SUFFIX));
                     useragent.setSummary(getResources().getString(R.string.agent_custom));
                 }
             });

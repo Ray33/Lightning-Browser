@@ -18,6 +18,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -45,6 +46,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import acr.browser.lightning.BuildConfig;
 import acr.browser.lightning.app.BrowserApp;
 import acr.browser.lightning.constant.BookmarkPage;
 import acr.browser.lightning.constant.Constants;
@@ -148,7 +150,7 @@ public class LightningView {
         mWebView.setDownloadListener(new LightningDownloadListener(activity));
         mGestureDetector = new GestureDetector(activity, new CustomGestureListener());
         mWebView.setOnTouchListener(new TouchListener());
-        sDefaultUserAgent = mWebView.getSettings().getUserAgentString();
+        sDefaultUserAgent = mWebView.getSettings().getUserAgentString() + TextUtils.htmlEncode(BuildConfig.USER_AGENT_SUFFIX);
         initializeSettings();
         initializePreferences(activity);
 
@@ -524,7 +526,8 @@ public class LightningView {
         switch (choice) {
             case 1:
                 if (API >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    settings.setUserAgentString(WebSettings.getDefaultUserAgent(context));
+                    settings.setUserAgentString(WebSettings.getDefaultUserAgent(context) +
+                            TextUtils.htmlEncode(BuildConfig.USER_AGENT_SUFFIX));
                 } else {
                     settings.setUserAgentString(sDefaultUserAgent);
                 }

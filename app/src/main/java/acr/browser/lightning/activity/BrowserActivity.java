@@ -1338,7 +1338,7 @@ public abstract class BrowserActivity extends ThemableBrowserActivity implements
             WebUtils.clearHistory(this, mHistoryDatabase);
             Log.d(TAG, "History Cleared");
         }
-        if (mPreferences.getClearCookiesExitEnabled() && !isIncognito()) {
+        if (mPreferences.getClearCookiesExitEnabled() && !isIncognito() && !BuildConfig.IS_INCOGNITO_MODE_DEFAULT) {
             WebUtils.clearCookies(this);
             Log.d(TAG, "Cookies Cleared");
         }
